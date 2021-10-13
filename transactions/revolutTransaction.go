@@ -82,7 +82,7 @@ func NewRevolutTransaction(rawData string) *revolutTransaction {
 }
 
 func (t revolutTransaction) GetCompletedDate() time.Time {
-  return t.completedDate
+  return time.Date(t.completedDate.Year(), t.completedDate.Month(), t.completedDate.Day(), 0, 0, 0, 0, time.UTC)
 }
 
 func (t revolutTransaction) Output() {
