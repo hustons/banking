@@ -29,7 +29,7 @@ func NewAIBTransaction(rawData string) *aibTransaction {
 
   transactionDate, err := time.Parse("02/01/06", data[1])
   if err != nil {
-    log.Fatal("Could not parse date: ", err)
+    log.Fatal("Could not parse date: ", err, "\nRaw data: ", rawData)
   }
 
   t.completedDate = transactionDate
@@ -39,7 +39,7 @@ func NewAIBTransaction(rawData string) *aibTransaction {
 
   t.amount, err = t.parseAmount(data[3], data[4])
   if err != nil {
-    log.Fatal("Could not parse amount: ", err)
+    log.Fatal("Could not parse amount: ", err, "\nRaw data: ", rawData)
   }
 
   t.balance = data[5]
@@ -80,7 +80,7 @@ func (t aibTransaction) parseAmount(debitAmount string, creditAmount string) (fl
     amount, err := strconv.ParseFloat(debitAmount, 32)
 
     if err != nil {
-      log.Fatal("Could not parse amount: ", err)
+      return amount, fmt.Errorf("Could not parse amount: %w", err)
     }
 
     return amount, nil
@@ -90,7 +90,7 @@ func (t aibTransaction) parseAmount(debitAmount string, creditAmount string) (fl
     amount, err := strconv.ParseFloat(creditAmount, 32)
 
     if err != nil {
-      log.Fatal("Could not parse amount: ", err)
+      return amount, fmt.Errorf("Could not parse amount: %w")
     }
 
     if amount != 0 {

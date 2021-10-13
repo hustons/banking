@@ -34,7 +34,7 @@ func NewRevolutTransaction(rawData string) *revolutTransaction {
 
   completedDate, err := time.Parse("2 Jan 2006", data[0])
   if err != nil {
-    log.Fatal("Could not parse date: ", err)
+    log.Fatal("Could not parse date: ", err, "\nRaw data: ", rawData)
   }
 
   t.completedDate = completedDate
@@ -46,7 +46,7 @@ func NewRevolutTransaction(rawData string) *revolutTransaction {
   if paidOut != "" {
     t.amount, err = strconv.ParseFloat(paidOut, 64)
     if err != nil {
-      log.Fatal("Could not parse amount: ", err, "\nRaw data: ", rawData)
+      log.Fatal("Could not parse date: ", err, "\nRaw data: ", rawData)
     }
   } else {
     t.amount, err = strconv.ParseFloat(paidIn, 32)
