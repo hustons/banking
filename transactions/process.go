@@ -13,8 +13,8 @@ func Process(revolutFile string, aibFile string, startDate time.Time) {
   revolutLines := utils.ReadInputFile(revolutFile)
   aibLines := utils.ReadInputFile(aibFile)
 
-  report = report.AddTransactions(revolutLines)
-  report = report.AddTransactions(aibLines)
+  report = report.AddTransactions(revolutLines, true)
+  report = report.AddTransactions(aibLines, false)
 
   report.Sort()
   report.Output()

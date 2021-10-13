@@ -3,7 +3,6 @@ package transactions
 import (
   "fmt"
   "time"
-  "strings"
   "sort"
 )
 
@@ -20,8 +19,7 @@ func NewReport(startDate time.Time) *report {
   return r
 }
 
-func (r report) AddTransactions(rawData[]string) *report {
-  isRevolut := strings.HasPrefix(rawData[0], "Completed Date")
+func (r report) AddTransactions(rawData[]string, isRevolut bool) *report {
   if isRevolut {
     for i := len(rawData) - 1; i > 0; i-- {
       transaction := NewRevolutTransaction(rawData[i])
