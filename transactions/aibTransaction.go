@@ -90,7 +90,7 @@ func (t aibTransaction) parseAmount(debitAmount string, creditAmount string) (fl
     amount, err := strconv.ParseFloat(creditAmount, 32)
 
     if err != nil {
-      return amount, fmt.Errorf("Could not parse amount: %w")
+      return amount, fmt.Errorf("Could not parse amount: %w", err)
     }
 
     if amount != 0 {
