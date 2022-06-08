@@ -101,5 +101,5 @@ func (t revolutTransaction) Output() {
 }
 
 func (t revolutTransaction) shouldHide() bool {
-  return t.transactionType == "TOPUP" || t.state == "PENDING"
+  return t.amount == 0 || t.transactionType == "TOPUP" || t.state == "PENDING"
 }
