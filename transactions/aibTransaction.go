@@ -108,22 +108,7 @@ func (t aibTransaction) shouldHide() bool {
     return true
   }
 
-  if t.details == "VDP-Revolut**2734*" ||
-     t.details == "VDP-Revolut**4772*" ||
-     t.details == "VDP-REVOLUT*4772*" ||
-     t.details == "VDP-REVOLUT*2484*" ||
-     t.details == "VDP-Revolut* - 477" ||
-     t.details == "VDP-Revolut  - 477" ||
-     t.details == "VDP-Revolut  - 107" ||
-     t.details == "VDP-Revolut  - 652" ||
-     t.details == "VDP-Revolut  - 281" ||
-     t.details == "VDP-Revolut  - 230" ||
-     t.details == "VDP-Revolut  - 246" ||
-     t.details == "VDP-Revolut  - 385" ||
-     t.details == "VDP-Revolut  - 975" ||
-     t.details == "VDP-Revolut  - 341" ||
-     t.details == "VDP-Revolut  - 973" ||
-     t.details == "VDP-Revolut**9510*" {
+  if t.isRevolutTopUp() {
     return true
   }
 
@@ -142,4 +127,12 @@ func (t aibTransaction) shouldHide() bool {
   }
 
   return false
+}
+
+func (t aibTransaction) isRevolutTopUp() bool {
+  return strings.HasPrefix(t.details, "VDP-Revolut**") ||
+         strings.HasPrefix(t.details, "VDP-Revolut* - ") ||
+         strings.HasPrefix(t.details, "VDP-Revolut  - ") ||
+         strings.HasPrefix(t.details, "VDP-REVOLUT*") ||
+         t.details == "VDP-Revolut"
 }
