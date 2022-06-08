@@ -40,11 +40,7 @@ Formatted data output includes these supplied classifications by default.
 Any transactions which cannot be automatically classified based on the classifications.json file will be classified as "UNKNOWN"
 Foratted data can be used elsewhere to understand spending types and remaining budget per classification.`,
   Run: func(cmd *cobra.Command, args []string) {
-    startDate, err := time.Parse("20060102", start)
-    if err != nil {
-      log.Fatal("Could not parse start date: ", err)
-    }
-    startDate = startDate.Add(time.Hour * -24)
+    startDate := getStartDate(start)
     transactions.Process(revolutFile, aibFile, startDate)
   },
 }
@@ -55,4 +51,16 @@ func init() {
   processCmd.Flags().StringVarP(&revolutFile, "revolutFile", "r", "", "The path to the exported Revolut statement file")
   processCmd.Flags().StringVarP(&aibFile, "aibFile", "a", "", "The path to the exported AIB statement file")
   processCmd.Flags().StringVarP(&start, "startDate", "s", "", "The earliest date to be processed (format yyyymmdd)")
+}
+
+func getStartDate(start string) time.Time {
+  if start != "" {
+    startDate, err := time.Parse("20060102", start)
+    if err != nil {
+      log.Fatal("Could not parse start date: ", err)
+    }
+    return startDate.Add(time.Hour * -24)
+  }
+
+  return time.Unix(0, 0)
 }
