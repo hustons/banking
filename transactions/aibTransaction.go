@@ -72,7 +72,7 @@ func (t aibTransaction) Output() {
 func (t aibTransaction) parseAmount(debitAmount string, creditAmount string) (float64, error) {
   var amount float64
 
-  if debitAmount == "" && creditAmount == "" {
+  if debitAmount != "" && creditAmount != "" {
     return amount, errors.New("Transaction with both credit and debit amounts found")
   }
 
