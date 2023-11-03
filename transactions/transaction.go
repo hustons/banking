@@ -5,7 +5,7 @@ import (
 )
 
 type transaction interface {
-  Output()
+  Output() string
   GetCompletedDate() time.Time
 }
 
