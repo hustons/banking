@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/shuston/banking/utils"
+	"github.com/stonish/banking/utils"
 )
 
 type revolutTransaction struct {

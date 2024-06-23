@@ -1,4 +1,4 @@
-module github.com/shuston/banking
+module github.com/stonish/banking
 
 go 1.17
 
